@@ -91,15 +91,15 @@ App.on('ready', function() {
   
   Ipc.on('save-to-fs', function (e, arg) {
     subWindow.capturePage(arg, function (image) {
-      subWindow.setAlwaysOnTop(false)
+      subWindow.setAlwaysOnTop(false);
       Dialog.showSaveDialog({title: '请选择保存路径', defaultPath: 'E:/', filters: [
         { name: 'Images', extensions: ['png'] }
       ]}, function (p) {
         Fs.writeFile(p, image.toPng(), function () {
-          subWindow.close()
-          mainWindow.show()
-        })
-      })
-    })
-  })
+          subWindow.close();
+          mainWindow.show();
+        });
+      });
+    });
+  });
 });
