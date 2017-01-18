@@ -84,6 +84,7 @@ App.on('ready', function() {
   Ipc.on('cut', function (e, arg) {
     subWindow.capturePage(arg, function (image) {
       Clipboard.writeImage(image);
+      console.log("关闭");
       subWindow.close();
       mainWindow.show();
     });
