@@ -8,25 +8,28 @@
       html, body {padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden}
       canvas {width: 100%; height: 100%; display: block}
       img {display: none}
-      #ctrl {display: block; backgroud: rgba(255, 255, 255, 0.6); font-size: 20px; position: absolute; z-index: 2; left: 50%; margin-left: -75px; bottom: 0; width: 150px; height: 40px; line-height: 40px}
-      .opt {width: 50px; height: 40px; float: left; text-align: center; cursor: pointer; border-radius: 4px}
+      .ctrl {display: block; font-size: 20px; position: absolute; z-index: 2; left: 50%; margin-left: -75px; bottom: 0; width: 150px; height: 40px; line-height: 40px}
+      .opt {width: 50px; height: 40px; float: left; text-align: center; cursor: pointer; border-radius: 4px;color: white;}
       .opt:hover {background: #000; color: #fff}
-      .cuted #ctrl {opacity: 0.6}
+      .cuted .ctrl {opacity: 0.6}
     </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
-    <div id="ctrl"><div class="opt" id="ok">✓ </div><div class="opt" id="save">↯</div><div class="opt" id="cancel">✗</div></div>
+    <div id="ctrl" class="ctrl">
+      <div class="opt" id="ok">✓ </div>
+      <div class="opt" id="save">↯</div>
+      <div class="opt" id="cancel">✗</div>
+    </div>
     <script>
-      var imgData = localStorage['img'],
-        cutImgData = null,
-        ipc = require('electron').ipcRenderer
-      
-      var okBtn = document.getElementById('ok'),
-        saveBtn = document.getElementById('save'),
-        cancelBtn = document.getElementById('cancel'),
-        canvas = document.getElementById('canvas')
-      
+      const imgData = localStorage['img'],
+            ipc = require('electron').ipcRenderer,
+            okBtn = document.getElementById('ok'),//完成按钮
+            saveBtn = document.getElementById('save'),//保存按钮
+            cancelBtn = document.getElementById('cancel'),//取消按钮
+            canvas = document.getElementById('canvas');
+      let   cutImgData = null;
+      //添加按钮点击事件
       okBtn.addEventListener('click', ok)
       saveBtn.addEventListener('click', save)
       cancelBtn.addEventListener('click', cancel)

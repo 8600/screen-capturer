@@ -67,7 +67,7 @@ App.on('ready', function() {
       transparent:true,
       show:false
     });
-    //subWindow.webContents.openDevTools()
+    //subWindow.webContents.openDevTools();
     let webContents = subWindow.webContents;
     subWindow.loadURL('file://' + __dirname + '/sub.html');
     webContents.on('did-finish-load', (event) => {
@@ -80,13 +80,14 @@ App.on('ready', function() {
     mainWindow.show();
   });
   
+  //页面发来截图消息处理事件
   Ipc.on('cut', function (e, arg) {
     subWindow.capturePage(arg, function (image) {
-      Clipboard.writeImage(image)
-      subWindow.close()
-      mainWindow.show()
-    })
-  })
+      Clipboard.writeImage(image);
+      subWindow.close();
+      mainWindow.show();
+    });
+  });
   
   Ipc.on('save-to-fs', function (e, arg) {
     subWindow.capturePage(arg, function (image) {
